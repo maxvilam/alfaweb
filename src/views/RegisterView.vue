@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <h2>Crear Cuenta</h2>
     <div class="form-group">
       <label for="correo">Correo</label>
       <input
@@ -20,32 +21,30 @@
         v-model="password"
       />
     </div>
-    <button type="submit" @click="login" class="btn btn-primary">
+    <button type="submit" @click="createuser" class="btn btn-primary">
       Ingresar
     </button>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 export default {
-  name: "HomeView",
+  name: "RegisterView",
   data() {
     return {
       email: "",
       password: "",
-      error: "",
     };
   },
   methods: {
-    async login() {
+    async createuser() {
       const email = this.email;
       const password = this.password;
 
       const auth = getAuth();
       try {
-        const userCredential = await signInWithEmailAndPassword(
+        const userCredential = await createUserWithEmailAndPassword(
           auth,
           email,
           password
@@ -59,3 +58,5 @@ export default {
   },
 };
 </script>
+
+<style></style>
