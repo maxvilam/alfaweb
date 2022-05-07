@@ -1,7 +1,6 @@
 <template>
   <div>
     <h2>h2 cursos</h2>
-    
   </div>
 </template>
 

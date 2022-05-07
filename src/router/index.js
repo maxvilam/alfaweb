@@ -27,7 +27,7 @@ const routes = [
     path: "/cursos",
     name: "cursos",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/CursesView.vue"),
+      import(/* webpackChunkName: "about" */ "../views/CursosView.vue"),
     meta: {
       requiresAuth: true,
     },
