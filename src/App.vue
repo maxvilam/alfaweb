@@ -34,15 +34,18 @@ export default {
       userlogin: "",
     };
   },
+
   methods: {
-    ...mapActions(["logout"]),
+    ...mapActions(["logout", "getCursos"]),
     out() {
       const user = this.userid;
       this.logout();
       this.userlogin = user;
     },
   },
-
+  created() {
+    this.getCursos();
+  },
   computed: {
     ...mapState(["isAuthenticated"]),
     logeado() {
