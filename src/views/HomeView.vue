@@ -28,7 +28,8 @@
 
 <script>
 // @ is an alias to /src
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { mapActions } from "vuex";
+
 export default {
   name: "HomeView",
   data() {
@@ -39,22 +40,9 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["loginFirebase"]),
     async login() {
-      const email = this.email;
-      const password = this.password;
-
-      const auth = getAuth();
-      try {
-        const userCredential = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-
-        console.log(userCredential);
-      } catch (error) {
-        console.log(error);
-      }
+      await this.loginFirebase({ email: this.email, password: this.password });
     },
   },
 };
