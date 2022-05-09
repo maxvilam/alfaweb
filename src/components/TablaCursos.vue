@@ -17,7 +17,7 @@
       <td>{{ curso.cupos }}</td>
       <td>{{ curso.descripcion }}</td>
       <td>{{ curso.duracion }}</td>
-      <td>{{ curso.estado }}</td>
+      <td>{{ curso.estado ? "Verdadero" : "Falso" }}</td>
       <td><img width="40px" :src="curso.imagen" :alt="curso.nombre" /></td>
       <td>{{ curso.inscritos }}</td>
       <td>{{ curso.nombre }}</td>
