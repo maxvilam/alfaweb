@@ -1,14 +1,38 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
+  <div>
+    <tr>
+      <th>Codigo /</th>
+      <th>Costo /</th>
+      <th>Cupos /</th>
+      <th>Descripción /</th>
+      <th>Duración /</th>
+      <th>Estado /</th>
+      <th>Imagen /</th>
+      <th>inscritos /</th>
+      <th>Nombre /</th>
+    </tr>
+    <tr v-for="(curso, i) in list" :key="i">
+      <td>{{ curso.codigo }}</td>
+      <td>{{ curso.costo }}</td>
+      <td>{{ curso.cupos }}</td>
+      <td>{{ curso.descripcion }}</td>
+      <td>{{ curso.duracion }}</td>
+      <td>{{ curso.estado }}</td>
+      <td><img width="40px" :src="curso.imagen" :alt="curso.nombre" /></td>
+      <td>{{ curso.inscritos }}</td>
+      <td>{{ curso.nombre }}</td>
+    </tr>
   </div>
 </template>
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "TablaCursos",
   props: {
-    msg: String,
+    list: {
+      type: Array,
+      default: () => [],
+    },
   },
 };
 </script>
