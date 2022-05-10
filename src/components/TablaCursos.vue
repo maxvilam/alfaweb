@@ -10,9 +10,9 @@
       <th>Imagen /</th>
       <th>inscritos /</th>
       <th>Nombre /</th>
+      <th>Que deseas hacer /</th>
     </tr>
     <tr v-for="(curso, i) in list" :key="i">
-      <td>{{ curso.codigo }}</td>
       <td>{{ curso.costo }}</td>
       <td>{{ curso.cupos }}</td>
       <td>{{ curso.descripcion }}</td>
@@ -21,11 +21,17 @@
       <td><img width="40px" :src="curso.imagen" :alt="curso.nombre" /></td>
       <td>{{ curso.inscritos }}</td>
       <td>{{ curso.nombre }}</td>
+      <td>{{ curso.id }}</td>
+      <td>
+        <span @click="linkeditcurso(curso.codigo)" class="fotmat-icon">🛠</span>
+      </td>
     </tr>
   </div>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 export default {
   name: "TablaCursos",
   props: {
@@ -34,11 +40,23 @@ export default {
       default: () => [],
     },
   },
+  methods: {
+    ...mapMutations(["SET_EDIT_CURSO"]),
+    linkeditcurso(id) {
+      this.SET_EDIT_CURSO(id);
+      this.$router.push("/edit-curso");
+    },
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.fotmat-icon {
+  font-size: 2rem;
+  color: #ff0000;
+  cursor: pointer;
+}
 h3 {
   margin: 40px 0 0;
 }

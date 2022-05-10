@@ -11,8 +11,13 @@ export default new Vuex.Store({
   state: {
     isAuthenticated: false,
     cursos: [],
+    editcurso: "",
   },
-  getters: {},
+  getters: {
+    getCursosFilter: (state) => (id) => {
+      return state.cursos.filter((data) => data.id === id);
+    },
+  },
   mutations: {
     setIsAuthenticated(state, payload) {
       state.isAuthenticated = payload;
@@ -20,12 +25,16 @@ export default new Vuex.Store({
     SET_DATA_CURSOS(state, payload) {
       state.cursos = payload;
     },
+    SET_EDIT_CURSO(state, payload) {
+      state.editcurso = payload;
+    },
   },
   actions: {
     async getCursos({ commit }) {
       try {
         const querySnapshot = await getDocs(collection(db, "cursos"));
         const data = querySnapshot.docs.map((doc) => doc.data());
+        console.log(data);
         commit("SET_DATA_CURSOS", data);
       } catch (e) {
         console.error(e);
