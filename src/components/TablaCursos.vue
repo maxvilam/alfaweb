@@ -1,31 +1,30 @@
 <template>
   <div>
-    <tr>
-      <th>Codigo /</th>
-      <th>Costo /</th>
-      <th>Cupos /</th>
-      <th>Descripción /</th>
-      <th>Duración /</th>
-      <th>Estado /</th>
-      <th>Imagen /</th>
-      <th>inscritos /</th>
-      <th>Nombre /</th>
-      <th>Que deseas hacer /</th>
-    </tr>
-    <tr v-for="(curso, i) in list" :key="i">
-      <td>{{ curso.costo }}</td>
-      <td>{{ curso.cupos }}</td>
-      <td>{{ curso.descripcion }}</td>
-      <td>{{ curso.duracion }}</td>
-      <td>{{ curso.estado ? "Verdadero" : "Falso" }}</td>
-      <td><img width="40px" :src="curso.imagen" :alt="curso.nombre" /></td>
-      <td>{{ curso.inscritos }}</td>
-      <td>{{ curso.nombre }}</td>
-      <td>{{ curso.id }}</td>
-      <td>
-        <span @click="linkeditcurso(curso.codigo)" class="fotmat-icon">🛠</span>
-      </td>
-    </tr>
+    <b-card-group>
+      <b-card
+        v-for="(curso, i) in list"
+        :key="i"
+        :img-src="curso.imagen"
+        img-alt="Image"
+        img-top
+        tag="article"
+        style="max-width: 25rem"
+        class="mx-auto bb-4"
+      >
+        <h2>{{ curso.nombre }}</h2>
+        <b-card-text class="text-left"> Información </b-card-text>
+        <b-card-text>Costo: {{ curso.costo }} </b-card-text>
+        <b-card-text> Duración: {{ curso.duracion }} </b-card-text>
+        <b-card-text>Cupos: {{ curso.cupos }}</b-card-text>
+        <b-card-text>
+          Completado: {{ curso.estado ? "Sí" : "No" }}
+        </b-card-text>
+        <b-card-text>
+          Fecha de registro: {{ dia }}/{{ mes }}/{{ anno }}</b-card-text
+        >
+        <b-card-text> Descripción: {{ curso.descripcion }} </b-card-text>
+      </b-card>
+    </b-card-group>
   </div>
 </template>
 
@@ -34,6 +33,13 @@ import { mapMutations } from "vuex";
 
 export default {
   name: "TablaCursos",
+  data() {
+    return {
+      mes: new Date().getMonth() + 1,
+      dia: new Date().getDate(),
+      anno: new Date().getFullYear(),
+    };
+  },
   props: {
     list: {
       type: Array,

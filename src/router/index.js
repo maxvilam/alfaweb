@@ -49,6 +49,15 @@ const routes = [
       requiresAuth: false,
     },
   },
+  {
+    path: "/admin",
+    name: "admin",
+
+    component: () => import("../views/AdminView.vue"),
+    meta: {
+      requiresAuth: false,
+    },
+  },
 ];
 
 const router = new VueRouter({

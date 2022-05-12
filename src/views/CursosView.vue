@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>h2 cursos</h2>
+    <h2>Lista de Cursos</h2>
     <div>
       <TablaCursos :list="cursos" />
     </div>
