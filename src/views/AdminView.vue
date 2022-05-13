@@ -26,17 +26,53 @@
           <td>{{ curso.fecha }}</td>
           <td>
             <span @click="linkeditcurso(curso.codigo)" class="fotmat-icon"
-              >🛠</span
-            >
+              ><b-iconstack font-scale="3">
+                <b-icon
+                  stacked
+                  icon="pencil"
+                  variant="primary"
+                  scale="0.75"
+                ></b-icon> </b-iconstack
+            ></span>
           </td>
           <td>
             <span @click="linkeditcurso(curso.codigo)" class="fotmat-icon"
-              >🧺</span
-            >
+              ><b-iconstack font-scale="3">
+                <b-icon
+                  stacked
+                  icon="trash-fill"
+                  variant="primary"
+                  scale="0.75"
+                ></b-icon> </b-iconstack
+            ></span>
           </td>
         </tr>
       </tbody>
     </table>
+    <b-list-group>
+      <b-list-group-item variant="info"
+        >Cantidad total de alumnos permitidos: {{ totales.cupos }} alumnos
+      </b-list-group-item>
+      <b-list-group-item variant="primary"
+        >Cantidad de alumnos inscritos:
+        {{ totales.inscritos }} alumnos</b-list-group-item
+      >
+      <b-list-group-item variant="secondary"
+        >Cantidad total de cupos restantes:
+        {{ totales.cupos - totales.inscritos }}
+      </b-list-group-item>
+      <b-list-group-item variant="success"
+        >Cantidad de cursos terminados:
+        {{ totales.ct }} cursos</b-list-group-item
+      >
+      <b-list-group-item variant="danger"
+        >Cantidad de cursos activos: {{ totales.ca }} cursos</b-list-group-item
+      >
+      <b-list-group-item variant="warning"
+        >Cantidad total de cursos:
+        {{ totales.ca + totales.ct }} cursos</b-list-group-item
+      >
+    </b-list-group>
   </div>
 </template>
 
@@ -50,7 +86,32 @@ export default {
   name: "AdminView",
   computed: {
     ...mapState(["cursos"]),
+    totales() {
+      let inscritos = 0;
+      let cupos = 0;
+      let ct = 0;
+      let ca = 0;
+
+      for (let i = 0; i < this.cursos.length; i++) {
+        inscritos += this.cursos[i].inscritos;
+        cupos += this.cursos[i].cupos;
+        if (this.cursos[i].estado) {
+          ct++;
+        } else {
+          ca++;
+        }
+      }
+      return { inscritos, cupos, ct, ca };
+    },
+    totalpermitidos() {
+      let inscritos = 0;
+      for (let i = 0; i < this.cursos.length; i++) {
+        inscritos += this.cursos[i].inscritos;
+      }
+      return inscritos;
+    },
   },
+
   methods: {
     ...mapMutations(["SET_EDIT_CURSO"]),
     linkeditcurso(id) {
